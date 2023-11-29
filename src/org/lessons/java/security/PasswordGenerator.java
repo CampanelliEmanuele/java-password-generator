@@ -4,12 +4,6 @@ import java.util.Scanner;
 
 public class PasswordGenerator {
     public static void main(String[] args) {
-
-        // salvare in opportune variabili il nome, cognome, colore preferito e data di nascita di un utente suddivisa in
-        // giorno, mese e anno (in numero).
-        // Generare (e stampare a video) una password concatenando nome, cognome, colore preferito e somma di giorno,
-        // mese e anno di nascita, separate dal carattere
-
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Enter your name: ");
@@ -25,25 +19,26 @@ public class PasswordGenerator {
         byte birthDay = userInput.nextByte();
 
         System.out.println("Enter your month of birth: ");
-        byte monthDay = userInput.nextByte();
+        byte birthMonth = userInput.nextByte();
 
         System.out.println("Enter your year of birth: ");
-        short yearDay = userInput.nextShort();
+        short birthYear = userInput.nextShort();
 
-        String password = createPass(name, surname, color, birthDay, monthDay, yearDay);
+        String password = createPass(name, surname, color, birthDay, birthMonth, birthYear);
         System.out.println("Your password is: " + password);
 
-        String password2 = createPass2(birthDay, monthDay, yearDay, name, surname, color);
+        String password2 = createPass2(birthDay, birthMonth, birthYear, name, surname, color);
         System.out.println("Your password2 is: " + password2);
     }
 
-    public static String createPass(String name, String surname, String color, byte birthDay, byte monthDay, short yearDay) {
-        return name + '-' + surname + '-' + color + '-' + (birthDay + monthDay + yearDay);
+    public static String createPass(String name, String surname, String color, byte birthDay, byte birthMonth, short birthYear) {
+        return name + '-' + surname + '-' + color + '-' + (birthDay + birthMonth + birthYear);
     }
 
-    public static String createPass2(byte birthDay, byte monthDay, short yearDay, String ...args) {
-        short sum = (short) (birthDay + monthDay + yearDay);
+    public static String createPass2(byte birthDay, byte birthMonth, short birthYear, String ...args) {
+        short sum = (short) (birthDay + birthMonth + birthYear);
         StringBuilder pass = new StringBuilder();
+
         for (String arg : args)
             pass.append(arg).append('-');
 
