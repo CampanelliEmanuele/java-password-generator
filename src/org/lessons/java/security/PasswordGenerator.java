@@ -1,6 +1,5 @@
 package org.lessons.java.security;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class PasswordGenerator {
@@ -32,13 +31,23 @@ public class PasswordGenerator {
         short yearDay = userInput.nextShort();
 
         String password = createPass(name, surname, color, birthDay, monthDay, yearDay);
-
         System.out.println("Your password is: " + password);
 
+        String password2 = createPass2(birthDay, monthDay, yearDay, name, surname, color);
+        System.out.println("Your password2 is: " + password2);
     }
 
     public static String createPass(String name, String surname, String color, byte birthDay, byte monthDay, short yearDay) {
-        String pass = name + '-' + surname + '-' + color + '-' + (birthDay + monthDay + yearDay);
-        return pass;
+        return name + '-' + surname + '-' + color + '-' + (birthDay + monthDay + yearDay);
+    }
+
+    public static String createPass2(byte birthDay, byte monthDay, short yearDay, String ...args) {
+        short sum = (short) (birthDay + monthDay + yearDay);
+        StringBuilder pass = new StringBuilder();
+        for (String arg : args)
+            pass.append(arg).append('-');
+
+        pass.append(sum);
+        return pass.toString();
     }
 }
